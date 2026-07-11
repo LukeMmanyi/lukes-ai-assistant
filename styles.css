@@ -1,0 +1,29 @@
+body {
+  background: linear-gradient(160deg, #FFFFFF 0%, #DCE9FF 50%, #BFD7FF 100%);
+  min-height: 100vh;
+}
+
+nav {
+  border-style: dashed;
+}
+
+.nav-p {
+  font-family: inter;
+  font-size: 20px;
+
+}
+
+.highlight {
+  color: #3B82F6;
+}
+
+.general-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 100px;
+}
+
+
+
+
