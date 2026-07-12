@@ -1,5 +1,5 @@
 const searchButton = document.querySelector('.search-button');
-const responseBox = document.querySelector('.ai-response');
+const responseLog = document.querySelector('.response-log');
 const searchBox = document.querySelector('.search-input');
 const greeting = document.querySelector('.greeting')
 
@@ -18,6 +18,16 @@ searchBox.addEventListener('keydown', (e) => {
 
 async function generateResponseHtml(input) {
   greeting.style.display = "none";
+  searchBox.value = "";
+  const userDiv = document.createElement('div');
+  userDiv.classList.add('user-div');
+  responseLog.appendChild(userDiv);
+  
+  
+  const userMSG = document.createElement('p');
+  userMSG.textContent = input;
+  userMSG.classList.add('user-msg');
+  userDiv.appendChild(userMSG);
 
   const responseData = await fetch('https://api.anthropic.com/v1/messages', {
     method: "POST",
@@ -43,9 +53,19 @@ body:  JSON.stringify({
 
   const aiResponse = inputData.content[0].text;
 
-  searchBox.value = "";
+    const aiDiv = document.createElement('div');
+  aiDiv.classList.add('ai-div');
+  responseLog.appendChild(aiDiv);
 
-  responseBox.innerHTML += aiResponse;
+  const aiMSG = document.createElement('p');
+  aiMSG.textContent = aiResponse;
+  aiMSG.classList.add('ai-msg');
+  aiDiv.appendChild(aiMSG);
+
+  
+
+  
+
 }
 
 
