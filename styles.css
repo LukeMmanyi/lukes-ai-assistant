@@ -15,13 +15,24 @@ body {
 }
 
 nav {
-  border-style: dashed;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.line {
+  border-bottom-style: solid;
+  border-bottom-color: #E5E7EB;
+  width: 100%;
 }
 
 .nav-p {
   font-family: inter;
   font-size: 15px;
   color: #0F172A;
+  margin-left: 40px;
+  font-weight: 300;
+  cursor: pointer;
 }
 
 .highlight {
@@ -29,16 +40,14 @@ nav {
 }
 
 .general-info {
-  border-style: dashed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 10px;
   padding: 5px;
 }
 
 .intro {
-  border-style: dashed;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,10 +78,15 @@ nav {
   width: 130px;
   font-family: inter;
   margin: 20px;
+  cursor: pointer;
+
+}
+
+.new-chat:active {
+  transform: scale(0.9);
 }
 
 .greeting {
-  border-style: dashed;
   margin-top: 75px;
   display: flex;
   justify-content: center;
@@ -80,6 +94,7 @@ nav {
   flex-direction: column;
 
 }
+
 .ai-orb {
  width: 80px;
   height: 80px;
@@ -90,6 +105,7 @@ nav {
   animation: pulse 3s ease-in-out infinite;
 }
 
+
 .greeting-h {
   font-family: inter;
   font-size: 50px;
@@ -98,7 +114,6 @@ nav {
 }
 
 .search-box {
-  border-style: dashed;
   margin-top: 50px;
   display: flex;
   justify-content: center;
@@ -107,20 +122,63 @@ nav {
 }
 
 .search-input {
-  width: 700px;
-  height: 200px;
+  width: 800px;
+  height: 125px;
  border: none;
  border-radius: 30px;
-
+background-color: white;
+  font-family: inter;
+ padding: 20px 0 0 20px;
+  text-align: left;
+  resize: vertical;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  min-height: 35px;
 }
 
 .search-input:focus {
   outline: none;
 }
 
+.search-input::placeholder {
+  color: #9CA3AF;
+}
 
 
+.search-button {
+  position: absolute;
+  cursor: pointer;
+  border: none;
+  color: white;
+  background-color: #3B82F6;
+  font-size: 15px;
+ 
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border-radius: 50%;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  bottom: 15px;
+  right: 15px;
+
+  
+}
+
+.search-button:active {
+  transform: scale(0.9);
+}
+
+.search-button:hover {
+  background-color: #93C5FD;
+}
+
+.search-wrapper {
+  position: relative;
+}
 
 
 
