@@ -3,6 +3,7 @@ const responseLog = document.querySelector('.response-log');
 const searchBox = document.querySelector('.search-input');
 const greeting = document.querySelector('.greeting');
 const searchDiv = document.querySelector('.search-box');
+const newChat = document.querySelector('.')
 
 searchButton.addEventListener('click', () => {
   const userInput = searchBox.value;
@@ -53,24 +54,50 @@ body:  JSON.stringify({
     messages: [
       {role: "user", content: input }
     ],
-    max_tokens: 1024
+    max_tokens: 1024,
+    stream: true
 })
   })
 
-  const inputData = await responseData.json();
+  
 
-  console.log(inputData);
 
-  const aiResponse = inputData.content[0].text;
-
+    let fullText = "";
     const aiDiv = document.createElement('div');
   aiDiv.classList.add('ai-div');
   responseLog.appendChild(aiDiv);
 
   const aiMSG = document.createElement('p');
-  aiMSG.innerHTML = marked.parse(aiResponse);
   aiMSG.classList.add('ai-msg');
   aiDiv.appendChild(aiMSG);
+
+  const reader = responseData.body.getReader();
+
+  const decoder = new TextDecoder();
+
+  while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+  const chunkText = decoder.decode(value);
+  
+  const chunkArr = chunkText.split('\n');
+
+
+
+  chunkArr.forEach((text) => {
+    if (text.startsWith('data')) {
+      const textString = text.slice(6);
+      const textObj = JSON.parse(textString);
+      console.log(textObj);
+
+      if (textObj.type === 'content_block_delta') {
+        const aiText = textObj.delta.text;
+        fullText += aiText;
+        aiMSG.innerHTML = marked.parse(fullText);
+      }
+    }
+  })
+}
 
   window.scrollTo(0, document.body.scrollHeight);
   
