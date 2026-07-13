@@ -1,7 +1,8 @@
 const searchButton = document.querySelector('.search-button');
 const responseLog = document.querySelector('.response-log');
 const searchBox = document.querySelector('.search-input');
-const greeting = document.querySelector('.greeting')
+const greeting = document.querySelector('.greeting');
+const searchDiv = document.querySelector('.search-box');
 
 searchButton.addEventListener('click', () => {
   const userInput = searchBox.value;
@@ -18,7 +19,16 @@ searchBox.addEventListener('keydown', (e) => {
 
 async function generateResponseHtml(input) {
   greeting.style.display = "none";
+  searchBox.classList.add('search-input-after');
   searchBox.value = "";
+  searchDiv.classList.add('search-box-after');
+  responseLog.classList.add('response-log-after');
+
+  searchBox.addEventListener('input', () => {
+  searchBox.style.height = 'auto';
+  searchBox.style.height = searchBox.scrollHeight + 'px';
+});
+
   const userDiv = document.createElement('div');
   userDiv.classList.add('user-div');
   responseLog.appendChild(userDiv);
@@ -58,10 +68,11 @@ body:  JSON.stringify({
   responseLog.appendChild(aiDiv);
 
   const aiMSG = document.createElement('p');
-  aiMSG.textContent = aiResponse;
+  aiMSG.innerHTML = marked.parse(aiResponse);
   aiMSG.classList.add('ai-msg');
   aiDiv.appendChild(aiMSG);
 
+  window.scrollTo(0, document.body.scrollHeight);
   
 
   
