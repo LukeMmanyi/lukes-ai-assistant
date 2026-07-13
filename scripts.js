@@ -53,6 +53,17 @@ async function generateResponseHtml(input) {
   let aiMSG;
   
   try{
+
+
+    let fullText = "";
+    const aiDiv = document.createElement('div');
+  aiDiv.classList.add('ai-div');
+  responseLog.appendChild(aiDiv);
+
+  aiMSG = document.createElement('p');
+  aiMSG.classList.add('ai-msg');
+  aiDiv.appendChild(aiMSG);
+  
   const responseData = await fetch('https://api.anthropic.com/v1/messages', {
     method: "POST",
     headers: {
@@ -73,16 +84,10 @@ body:  JSON.stringify({
   })
 
   
+  if (!responseData.ok) {
+  throw new Error("API request failed");
+}
 
-
-    let fullText = "";
-    const aiDiv = document.createElement('div');
-  aiDiv.classList.add('ai-div');
-  responseLog.appendChild(aiDiv);
-
-  aiMSG = document.createElement('p');
-  aiMSG.classList.add('ai-msg');
-  aiDiv.appendChild(aiMSG);
 
   const reader = responseData.body.getReader();
 
