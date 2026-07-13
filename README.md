@@ -3,12 +3,14 @@
 My own version of an AI chat assistant, built with plain HTML/CSS/JS and the Anthropic API. This was my 4th portfolio project.
 
 ## Live demo
-[link here]
+https://lukemmanyi.github.io/lukes-ai-assistant/
 
 Heads up — the live version won't actually chat since I'm not exposing my API key publicly. Check the gif below to see it actually working, or run it locally with your own key.
 
 ## Demo
 ![demo](./demo.gif)
+
+
 
 ## What it does
 - Streams responses in real time (actual streaming with ReadableStream, not a fake typewriter effect)
