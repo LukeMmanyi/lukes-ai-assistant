@@ -3,7 +3,7 @@ const responseLog = document.querySelector('.response-log');
 const searchBox = document.querySelector('.search-input');
 const greeting = document.querySelector('.greeting');
 const searchDiv = document.querySelector('.search-box');
-const newChat = document.querySelector('.')
+const newChat = document.querySelector('.new-chat');
 
 searchButton.addEventListener('click', () => {
   const userInput = searchBox.value;
@@ -17,6 +17,20 @@ searchBox.addEventListener('keydown', (e) => {
   }
 })
 
+newChat.addEventListener('click', () => {
+  greeting.style.display = "flex";
+  searchBox.classList.remove('search-input-after');
+  searchBox.value = "";
+  searchDiv.classList.remove('search-box-after');
+  responseLog.classList.remove('response-log-after');
+  responseLog.innerHTML = "";
+})
+
+searchBox.addEventListener('input', () => {
+  searchBox.style.height = 'auto';
+  searchBox.style.height = searchBox.scrollHeight + 'px';
+});
+
 
 async function generateResponseHtml(input) {
   greeting.style.display = "none";
@@ -25,10 +39,6 @@ async function generateResponseHtml(input) {
   searchDiv.classList.add('search-box-after');
   responseLog.classList.add('response-log-after');
 
-  searchBox.addEventListener('input', () => {
-  searchBox.style.height = 'auto';
-  searchBox.style.height = searchBox.scrollHeight + 'px';
-});
 
   const userDiv = document.createElement('div');
   userDiv.classList.add('user-div');
@@ -40,6 +50,9 @@ async function generateResponseHtml(input) {
   userMSG.classList.add('user-msg');
   userDiv.appendChild(userMSG);
 
+  let aiMSG;
+  
+  try{
   const responseData = await fetch('https://api.anthropic.com/v1/messages', {
     method: "POST",
     headers: {
@@ -67,13 +80,22 @@ body:  JSON.stringify({
   aiDiv.classList.add('ai-div');
   responseLog.appendChild(aiDiv);
 
-  const aiMSG = document.createElement('p');
+  aiMSG = document.createElement('p');
   aiMSG.classList.add('ai-msg');
   aiDiv.appendChild(aiMSG);
 
   const reader = responseData.body.getReader();
 
   const decoder = new TextDecoder();
+
+  aiMSG.innerHTML = `
+  <span class="loading-dots">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</span>
+  
+  `
 
   while (true) {
   const { done, value } = await reader.read();
@@ -98,6 +120,12 @@ body:  JSON.stringify({
     }
   })
 }
+  } catch (error) {
+    if (aiMSG) {
+      aiMSG.innerHTML = "Something went wrong. Please try again.";
+    }
+    console.log(error)
+  }
 
   window.scrollTo(0, document.body.scrollHeight);
   
