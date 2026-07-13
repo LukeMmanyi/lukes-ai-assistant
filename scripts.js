@@ -63,7 +63,7 @@ async function generateResponseHtml(input) {
   aiMSG = document.createElement('p');
   aiMSG.classList.add('ai-msg');
   aiDiv.appendChild(aiMSG);
-  
+
   const responseData = await fetch('https://api.anthropic.com/v1/messages', {
     method: "POST",
     headers: {
