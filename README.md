@@ -1,6 +1,6 @@
 # Lukova
 
-My own version of an AI chat assistant, built with plain HTML/CSS/JS and the Anthropic API. This was my 4th portfolio project.
+My own version of an AI chat assistant, built with plain HTML/CSS/JS and the Anthropic API. 
 
 ## Live demo
 https://lukemmanyi.github.io/lukes-ai-assistant/
